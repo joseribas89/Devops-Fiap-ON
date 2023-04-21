@@ -112,13 +112,12 @@ jobs:
           
   test-report:
     runs-on: ubuntu-latest
-    needs: code-analisys
     steps:
       - name: Test Report
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
           name: Test Results
-          path: ${{ github.workspace }}/TEST-TestSuite.xml
+          path: ./TEST-TestSuite.xml
           reporter: java-junit
           java-version: 11
