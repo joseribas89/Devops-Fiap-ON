@@ -113,27 +113,19 @@ jobs:
           
   security-scan:
     runs-on: ubuntu-latest
-    needs: code-analisys
+    needs: build
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Set up OWASP Dependency-Check
-      uses: dependency-check/dependency-check-action@v2
-      with:
-        format: 'ALL'
-        failOnCVSS: '7'
-        jarAnalyzerEnabled: 'true'
-        jarAnalyzerExcludes: '*.jar'
-        jarAnalyzerBundleAuditEnabled: 'true'
-        jarAnalyzerCentralEnabled: 'true'
-        logFile: '${{ github.workspace }}/dependency-check-report.log'
-        outputDirectory: '${{ github.workspace }}/dependency-check-report'
-    - name: Upload Dependency-Check report
-      uses: actions/upload-artifact@v2
-      with:
-        name: dependency-check-report
-        path: '${{ github.workspace }}/dependency-check-report' 
+      - name: Check for passwords/secrets
+        uses: zricethezav/gitleaks-action@v4.4.1
+        with:
+          # Exclude some file patterns from the scan
+          exclude: '*.md,*.txt'
+          # Set up the rules to search for passwords/secrets
+          # You can customize these rules based on your requirements
+          flags: --pretty --redact --repo-config=gitleaks.toml
+        env:
+          # Pass the GitHub token to the action
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-          
+
 
