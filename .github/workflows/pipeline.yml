@@ -130,6 +130,17 @@ jobs:
         env:
           # Pass the GitHub token to the action
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+          
+  bandit:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:         
+    - name: Analyze code with Bandit
+      uses: ioggstream/bandit-report-artifacts@v0.0.2
+      with:
+        project_path: .
+        ignore_failure: true
 
 
 
