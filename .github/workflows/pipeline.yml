@@ -118,12 +118,12 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
-          languages: go, javascript, java
+          languages:  java
 
       # Here is where you build your code
       - run: |
-          make bootstrap
-          make release
+          mvn test
+
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
