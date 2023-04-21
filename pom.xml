@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<sonar.organization>fabianocarneiro</sonar.organization>
+		<sonar.organization>joseribas89</sonar.organization>
   		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
@@ -65,7 +65,7 @@
 		<repository>
 			<id>github</id>
 			<name>GitHub Packages</name>
-			<url>https://maven.pkg.github.com/FabianoCarneiro/Devops-Fiap-ON</url>
+			<url>https://maven.pkg.github.com/joseribas89/Devops-Fiap-ON</url>
 		</repository>
 	</distributionManagement>
 	<build>
