@@ -5,6 +5,7 @@ WORKDIR /app
 
 # Copia os arquivos para o diretório de trabalho
 COPY src /app/src
+COPY .mvn /app/.mvn
 COPY target/site/jacoco /app/target/site/jacoco
 COPY README.md /app/README.md
 COPY mvnw /app/mvnw
