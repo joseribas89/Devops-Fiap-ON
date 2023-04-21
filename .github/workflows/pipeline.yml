@@ -109,31 +109,3 @@ jobs:
         shell: bash
         run: |
           echo "Deploy PRE"
-        
-  action-pull-request:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Run the Action
-        if: startsWith(github.ref, 'refs/heads/feature')
-        uses: devops-infra/action-pull-request@v0.5.5
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: develop
-          target_branch: release
-          title: My pull request
-          template: .github/PULL_REQUEST_TEMPLATE.md
-          body: "**Automated pull request**"
-          reviewer: octocat
-          assignee: octocat
-          label: enhancement
-          milestone: My milestone
-          draft: true
-          old_string: "<!-- Add your description here -->"
-          new_string: "** Automatic pull request**"
-          get_diff: true
-          ignore_users: "dependabot"
-          allow_no_diff: false
