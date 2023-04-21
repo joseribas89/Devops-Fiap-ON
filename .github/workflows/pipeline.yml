@@ -112,7 +112,7 @@ jobs:
           
   test-report:
     runs-on: ubuntu-latest
-    needs: deploy-Pre
+    needs: deploy-STG
     steps:
       - name: Test Report
         uses: dorny/test-reporter@v1
