@@ -109,22 +109,4 @@ jobs:
         shell: bash
         run: |
           echo "Deploy PRE"
-          
-  test-report:
-    runs-on: ubuntu-latest
-    needs: code-analisys
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          token: '${{ secrets.GITHUB_TOKEN }}'
-      - name: Run git init
-        run: git init
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()
-        with:
-          name: Test Results
-          path: ${{ github.workspace }}/*.xml
-          reporter: java-junit
-          disableAnnotations: true
-          java-version: 11
+        
