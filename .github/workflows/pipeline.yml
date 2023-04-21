@@ -110,21 +110,22 @@ jobs:
         run: |
           echo "Deploy PRE"
         
-  aqua:
-    name: Build
-    runs-on: ubuntu-20.04
+  action-pull-request:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Build an image from Dockerfile
-        run: |
-          docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+          fetch-depth: 0
+      - name: Run the Action
+        if: startsWith(github.ref, 'refs/heads/feature')
+        uses: devops-infra/action-pull-request@v0.5.5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          title: ${{ github.event.commits[0].message }}
+          assignee: ${{ github.actor }}
+          label: automatic,feature
+          template: .github/PULL_REQUEST_TEMPLATE/FEATURE.md
+          old_string: "**Write you description here**"
+          new_string: ${{ github.event.commits[0].message }}
+          get_diff: true
