@@ -120,10 +120,5 @@ jobs:
         with:
           languages:  java
 
-      # Here is where you build your code
-      - run: |
-          mvn test
-
-
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
