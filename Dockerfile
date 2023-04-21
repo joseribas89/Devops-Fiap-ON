@@ -5,7 +5,6 @@ WORKDIR /app
 
 # Copia os arquivos para o diretório de trabalho
 COPY src /app/src
-COPY .mvn /app/.mvn
 COPY target/site/jacoco /app/target/site/jacoco
 COPY README.md /app/README.md
 COPY mvnw /app/mvnw
@@ -14,8 +13,7 @@ COPY pom.xml /app/pom.xml
 COPY system.properties /app/system.properties
 
 # Executa o build da aplicação
-RUN chmod +x ./mvnw
-RUN ./mvnw package
+RUN mvn test
 
 # Expõe a porta 8080
 EXPOSE 8080
