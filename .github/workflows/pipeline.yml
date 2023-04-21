@@ -110,15 +110,4 @@ jobs:
         run: |
           echo "Deploy PRE"
           
-  CodeQL:
-    runs-on: ubuntu-latest
-    env: 
-      NEEDCUSTOM : publish
-    steps:
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-          languages:  java
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
