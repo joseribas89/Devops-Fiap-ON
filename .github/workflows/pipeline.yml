@@ -115,8 +115,11 @@ jobs:
     needs: code-analisys
     
     steps:
-      - name: Docker build and push 
-        shell: bash
-        run: |
-           docker build . --file Dockerfile --tag joseribas89/java:latest
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/java:latest
 
