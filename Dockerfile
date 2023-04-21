@@ -13,6 +13,7 @@ COPY pom.xml /app/pom.xml
 COPY system.properties /app/system.properties
 
 # Executa o build da aplicação
+RUN chmod +x ./mvnw
 RUN ./mvnw package
 
 # Expõe a porta 8080
