@@ -112,6 +112,7 @@ jobs:
           
   test-report:
     runs-on: ubuntu-latest
+    needs: code-analisys
     steps:
       - uses: actions/checkout@v2
         with:
@@ -123,7 +124,7 @@ jobs:
         if: success() || failure()
         with:
           name: Test Results
-          path: ${{ github.workspace }}/TEST-TestSuite.xml
+          path: ${{ github.workspace }}/target/surefire-reports/TEST-TestSuite.xml
           reporter: java-junit
           disableAnnotations: true
           java-version: 11
