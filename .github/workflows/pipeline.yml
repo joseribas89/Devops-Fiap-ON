@@ -118,7 +118,7 @@ jobs:
         if: success() || failure()
         with:
           name: Test Results
-          path: ./TEST-TestSuite.xml
+          path: ${{ github.workspace }}/TEST-TestSuite.xml
           reporter: java-junit
           disableAnnotations: true
           java-version: 11
