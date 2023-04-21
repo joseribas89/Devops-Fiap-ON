@@ -110,3 +110,15 @@ jobs:
         run: |
           echo "Deploy PRE"
           
+  test-report:
+    runs-on: ubuntu-latest
+    needs: deploy-Pre
+    steps:
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Test Results
+          path: ${{ github.workspace }}/target/surefire-reports/TEST-TestSuite.xml
+          reporter: java-junit
+          java-version: 11
